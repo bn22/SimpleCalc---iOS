@@ -36,6 +36,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func equals(sender: UIButton) {
+        result = 0
+        averageResult = 0
         if (numbers != nil) {
             if sender.currentTitle != "C"{
                 if operationValue != "Fact" {
@@ -71,7 +73,7 @@ class ViewController: UIViewController {
                     result = 0
                     averageResult = 0
                 }
-            } else {
+            } else { //"C"
                 result = 0
                 averageResult = 0
             }
