@@ -69,9 +69,11 @@ class ViewController: UIViewController {
                 } else {
                     error.text = "Unable to output an answer. Cleared Inputs"
                     result = 0
+                    averageResult = 0
                 }
             } else {
                 result = 0
+                averageResult = 0
             }
             if (operationValue == "Avg") {
                 results.text = String(averageResult)
