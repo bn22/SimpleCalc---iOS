@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     var numbersArray : [Int] = []
     var operationValue : String = ""
     var result : Int = 0
+    var averageResult : Double = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,6 +29,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var error: UILabel!
     
     @IBAction func numbers(sender: UIButton) {
+        error.text = "Remember to clear after each result"
         let numbersText = sender.currentTitle!
         numbers = numbers! + numbersText
         results.text = numbers
@@ -35,9 +37,11 @@ class ViewController: UIViewController {
     
     @IBAction func equals(sender: UIButton) {
         if (numbers != nil) {
-            if sender.currentTitle != "C" {
-                let numbersToPush : Int? = Int(numbers!)!
-                numbersArray.append(numbersToPush!)
+            if sender.currentTitle != "C"{
+                if operationValue != "Fact" {
+                    let numbersToPush : Int? = Int(numbers!)!
+                    numbersArray.append(numbersToPush!)
+                }
                 if operationValue == "+" && numbersArray.count == 2 {
                     result = numbersArray[0] + numbersArray[1]
                 } else if operationValue == "-" && numbersArray.count == 2{
@@ -61,14 +65,19 @@ class ViewController: UIViewController {
                     for (var index = 0; index < numbersArray.count; index++) {
                         result = result + numbersArray[index]
                     }
-                    result = result / numbersArray.count
+                    averageResult = Double(result) / Double(numbersArray.count)
                 } else {
                     error.text = "Unable to output an answer. Cleared Inputs"
+                    result = 0
                 }
             } else {
                 result = 0
             }
-            results.text = String(result)
+            if (operationValue == "Avg") {
+                results.text = String(averageResult)
+            } else {
+                results.text = String(result)
+            }
         }
         numbersArray = []
         numbers = ""
@@ -83,7 +92,7 @@ class ViewController: UIViewController {
             numbers = ""
             results.text = operationValue
         } else {
-            error.text = "Please Enter a Number"
+            error.text = "Can't do operation on result"
         }
     }
 }
